@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,42 +9,72 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookStore.styles.css" asp-append-version="true" />
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BookStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="header_section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="logo" href="index.html"><img src="@Url.Content("~/images/logo.png")"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Book/Index">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movies.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tv.html">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="celebs.html">Orthers</a>
+                    </li>
+                </ul>
+                <div class="search_icon"><a href="#"><img src="@Url.Content("~/images/user-icon.png")"><span
+                            class="padding_left_15">login</span></a></div>
             </div>
         </nav>
-    </header>
-    <div class="container">
+    </div>
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- footer  section start -->
+    <div class="footer_section layout_padding">
         <div class="container">
-            &copy; 2024 - BookStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="footer_menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="tv.html">TV</a></li>
+                    <li><a href="celebs.html">Celebs</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">News</a></li>
+                </ul>
+            </div>
+            <div class="social_icon">
+                <ul>
+                    <li><a href="#"><img src="@Url.Content("~/images/fb-icon.png")"></a></li>
+                    <li><a href="#"><img src="@Url.Content("~/images/twitter-icon.png")"></a></li>
+                    <li><a href="#"><img src="@Url.Content("~/images/linkedin-icon.png")"></a></li>
+                    <li><a href="#"><img src="@Url.Content("~/images/instagram-icon.png")"></a></li>
+                </ul>
+            </div>
         </div>
-    </footer>
+    </div>
+    <!-- footer  section end -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
