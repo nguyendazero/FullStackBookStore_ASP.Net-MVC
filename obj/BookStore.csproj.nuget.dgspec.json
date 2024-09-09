@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DotNet\\BookStore\\BookStore.csproj": {}
+    "D:\\DotNet\\LaptopStore\\BookStore.csproj": {}
   },
   "projects": {
-    "D:\\DotNet\\BookStore\\BookStore.csproj": {
+    "D:\\DotNet\\LaptopStore\\BookStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DotNet\\BookStore\\BookStore.csproj",
+        "projectUniqueName": "D:\\DotNet\\LaptopStore\\BookStore.csproj",
         "projectName": "BookStore",
-        "projectPath": "D:\\DotNet\\BookStore\\BookStore.csproj",
+        "projectPath": "D:\\DotNet\\LaptopStore\\BookStore.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\DotNet\\BookStore\\obj\\",
+        "outputPath": "D:\\DotNet\\LaptopStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

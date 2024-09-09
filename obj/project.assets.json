@@ -4073,11 +4073,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DotNet\\BookStore\\BookStore.csproj",
-      "projectName": "BookStore",
-      "projectPath": "D:\\DotNet\\BookStore\\BookStore.csproj",
+      "projectUniqueName": "D:\\DotNet\\LaptopStore\\LaptopStore.csproj",
+      "projectName": "LaptopStore",
+      "projectPath": "D:\\DotNet\\LaptopStore\\LaptopStore.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\DotNet\\BookStore\\obj\\",
+      "outputPath": "D:\\DotNet\\LaptopStore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

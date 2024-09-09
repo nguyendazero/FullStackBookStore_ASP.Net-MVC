@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using DotNet.BookStore.Models;
-namespace DotNet.BookStore.Models
+using DotNet.LaptopStore.Models;
+namespace DotNet.LaptopStore.Models
 {
     public class Laptop
     {

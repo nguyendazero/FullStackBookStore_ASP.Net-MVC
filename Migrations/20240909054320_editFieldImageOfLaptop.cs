@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookStore.Migrations
+namespace LaptopStore.Migrations
 {
     /// <inheritdoc />
     public partial class editFieldImageOfLaptop : Migration

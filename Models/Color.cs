@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace DotNet.BookStore.Models;
+namespace DotNet.LaptopStore.Models;
 
 public class Color
 {

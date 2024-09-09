@@ -1,4 +1,4 @@
-namespace BookStore.Models;
+namespace LaptopStore.Models;
 
 public class ErrorViewModel
 {

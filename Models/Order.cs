@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DotNet.BookStore.Models
+namespace DotNet.LaptopStore.Models
 {
     public class Order
     {

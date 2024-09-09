@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DotNet.BookStore.Models;
-using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using DotNet.BookStore.Models;
+using DotNet.LaptopStore.Models;
 
-namespace DotNet.BookStore.Data;
+namespace DotNet.LaptopStore.Data;
 
 public class DataContext : DbContext
 {

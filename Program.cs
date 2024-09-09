@@ -1,6 +1,5 @@
-using DotNet.BookStore.Data;
+using DotNet.LaptopStore.Data;
 using Microsoft.EntityFrameworkCore;
-using DotNet.BookStore.Services;
 using DotNet.LaptopStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);

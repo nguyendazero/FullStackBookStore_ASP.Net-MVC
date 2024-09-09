@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using DotNet.BookStore.Models;
+using DotNet.LaptopStore.Models;
 using System.Collections.Generic;
 using System.Linq;
-using DotNet.BookStore.Data;
+using DotNet.LaptopStore.Data;
 
-namespace DotNet.BookStore.Services
+namespace DotNet.LaptopStore.Services
 {
     public interface IColorService
     {
