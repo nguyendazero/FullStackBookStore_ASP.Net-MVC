@@ -26,7 +26,7 @@ namespace DotNet.BookStore.Services
         {
             return _dataContext.OrderDetails
                 .Where(od => od.OrderId == id)
-                .Include(od => od.Book)  // Nếu cần, thêm các liên kết khác
+                .Include(od => od.Laptop)  // Nếu cần, thêm các liên kết khác
                 .ToList();
         }
 

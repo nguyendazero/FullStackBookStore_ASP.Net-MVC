@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNet.BookStore.Models;
 using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet.BookStore.Controllers
@@ -12,13 +13,13 @@ namespace DotNet.BookStore.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRatingService _ratingService;
-        private readonly IBookService _bookService;
+        private readonly ILaptopService _laptopService;
 
-        public UserController(IUserService userService, IRatingService ratingService, IBookService bookService)
+        public UserController(IUserService userService, IRatingService ratingService, ILaptopService laptopService)
         {
             _userService = userService;
             _ratingService = ratingService;
-            _bookService = bookService;
+            _laptopService = laptopService;
         }
         public IActionResult Index()
         {

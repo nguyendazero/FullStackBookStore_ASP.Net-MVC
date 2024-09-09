@@ -4,26 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNet.BookStore.Models;
 using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet.BookStore.Controllers
 {
-    public class BookController : Controller
+    public class ColorController : Controller
     {
-        private readonly IBookService _bookService;
-        private readonly ICategoryService _categoryService;
-        private readonly IAuthorService _authorService;
+        private readonly IColorService _ColorService;
+        private readonly ILaptopService _laptopService;
 
-        public BookController(IBookService bookService, ICategoryService categoryService, IAuthorService authorService)
+        public ColorController(IColorService ColorService, ILaptopService laptopService)
         {
-            _bookService = bookService;
-            _categoryService = categoryService;
-            _authorService = authorService;
+            _ColorService = ColorService;
+            _laptopService = laptopService;
         }
         public IActionResult Index()
         {
-            var books = _bookService.GetAllBooks();
-            return View(books);
+
+            return View();
         }
 
         public IActionResult Create()
@@ -41,7 +40,7 @@ namespace DotNet.BookStore.Controllers
             return View();
         }
 
-        public IActionResult Save(Book book)
+        public IActionResult Save(Color Color)
         {
             return View();
         }

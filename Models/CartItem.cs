@@ -12,9 +12,9 @@ namespace DotNet.BookStore.Models
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Book ID is required")]
-        public int BookId { get; set; }
+        public int LaptopId { get; set; }
 
-        public virtual Book? Book { get; set; }
+        public virtual Laptop? Laptop { get; set; }
 
         [Required(ErrorMessage = "Cart ID is required")]
         public int CartId { get; set; }

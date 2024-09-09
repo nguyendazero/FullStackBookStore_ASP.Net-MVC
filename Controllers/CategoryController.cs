@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNet.BookStore.Models;
 using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet.BookStore.Controllers
@@ -11,12 +12,12 @@ namespace DotNet.BookStore.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        private readonly IBookService _bookService;
+        private readonly ILaptopService _laptopService;
 
-        public CategoryController(ICategoryService categoryService, IBookService bookService)
+        public CategoryController(ICategoryService categoryService, ILaptopService laptopService)
         {
             _categoryService = categoryService;
-            _bookService = bookService;
+            _laptopService = laptopService;
         }
         public IActionResult Index()
         {

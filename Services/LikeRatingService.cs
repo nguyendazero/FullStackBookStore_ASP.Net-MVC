@@ -27,7 +27,7 @@ namespace DotNet.BookStore.Services
         public List<LikeRating> GetAllLikeRatings()
         {
             return _dataContext.LikeRatings
-                .Include(lr => lr.Book)
+                .Include(lr => lr.Laptop)
                 .Include(lr => lr.User)
                 .Include(lr => lr.Rating)
                 .ToList();
@@ -36,7 +36,7 @@ namespace DotNet.BookStore.Services
         public LikeRating? GetLikeRatingById(int id)
         {
             return _dataContext.LikeRatings
-                .Include(lr => lr.Book)
+                .Include(lr => lr.Laptop)
                 .Include(lr => lr.User)
                 .Include(lr => lr.Rating)
                 .FirstOrDefault(lr => lr.Id == id);
@@ -54,7 +54,7 @@ namespace DotNet.BookStore.Services
                 .FirstOrDefault(lr => lr.Id == likeRating.Id);
             if (existingLikeRating == null) return;
 
-            existingLikeRating.BookId = likeRating.BookId;
+            existingLikeRating.LaptopId = likeRating.LaptopId;
             existingLikeRating.UserId = likeRating.UserId;
             existingLikeRating.RatingId = likeRating.RatingId;
 

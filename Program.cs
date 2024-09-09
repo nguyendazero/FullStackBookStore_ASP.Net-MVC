@@ -1,6 +1,7 @@
 using DotNet.BookStore.Data;
 using Microsoft.EntityFrameworkCore;
 using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -9,8 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("Default")));
 
-builder.Services.AddScoped<IAuthorService, AuthorService>();
-builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ILaptopService, LaptopService>();
 builder.Services.AddScoped<ICartItemService, CartItemService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

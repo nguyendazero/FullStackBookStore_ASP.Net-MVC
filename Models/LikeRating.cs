@@ -8,8 +8,8 @@ namespace DotNet.BookStore.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Book ID is required")]
-        public int BookId { get; set; }
-        public virtual Book? Book { get; set; }
+        public int LaptopId { get; set; }
+        public virtual Laptop? Laptop { get; set; }
 
         [Required(ErrorMessage = "User ID is required")]
         public int UserId { get; set; }

@@ -12,8 +12,8 @@ namespace DotNet.BookStore.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Book ID is required")]
-        public int BookId { get; set; }
-        public virtual Book? Book { get; set; }
+        public int LaptopId { get; set; }
+        public virtual Laptop? Laptop { get; set; }
 
         [Required(ErrorMessage = "Order ID is required")]
         public int OrderId { get; set; }

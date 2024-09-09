@@ -37,7 +37,7 @@ namespace DotNet.BookStore.Services
         {
             return _dataContext.Carts
                 .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Book)
+                .ThenInclude(ci => ci.Laptop)
                 .FirstOrDefault(c => c.UserId == userId) ?? new Cart(); // Return a new Cart if not found
         }
 
@@ -45,7 +45,7 @@ namespace DotNet.BookStore.Services
         {
             var existingCart = _dataContext.Carts
                 .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Book)
+                .ThenInclude(ci => ci.Laptop)
                 .FirstOrDefault(c => c.Id == cart.Id);
 
             if (existingCart == null) return;
@@ -85,9 +85,9 @@ namespace DotNet.BookStore.Services
 
             double discount = coupon.Discount;
 
-            // Calculate total price ensuring that Book is not null
+            // Calculate total price ensuring that Laptop is not null
             double total = cart.CartItems
-                .Sum(ci => (ci.Book != null ? ci.Quantity * ci.Book.Price : 0));
+                .Sum(ci => (ci.Laptop != null ? ci.Quantity * ci.Laptop.Price : 0));
 
             double discountedTotal = total - (total * discount / 100);
 

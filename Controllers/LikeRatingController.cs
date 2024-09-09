@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNet.BookStore.Models;
 using DotNet.BookStore.Services;
+using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet.BookStore.Controllers
@@ -11,13 +12,13 @@ namespace DotNet.BookStore.Controllers
     public class LikeRatingController : Controller
     {
         private readonly ILikeRatingService _likeRatingService;
-        private readonly IBookService _bookService;
+        private readonly ILaptopService _laptopService;
         private readonly IUserService _userService;
 
-        public LikeRatingController(ILikeRatingService likeRatingService, IBookService bookService, IUserService userService)
+        public LikeRatingController(ILikeRatingService likeRatingService, ILaptopService laptopService, IUserService userService)
         {
             _likeRatingService = likeRatingService;
-            _bookService = bookService;
+            _laptopService = laptopService;
             _userService = userService;
         }
         public IActionResult Index()

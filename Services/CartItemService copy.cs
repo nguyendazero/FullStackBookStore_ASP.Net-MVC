@@ -8,7 +8,7 @@ namespace DotNet.BookStore.Services
 {
     public interface ICartItemService
     {
-        void AddToCart(int bookId, User user);
+        void AddToCart(int LaptopId, User user);
         void RemoveFromCart(int cartItemId, User user);
         List<CartItem> GetAllCartItemsByCartId(int cartId);
         CartItem SaveCartItem(CartItem cartItem);
@@ -28,7 +28,7 @@ namespace DotNet.BookStore.Services
             _dataContext = dataContext;
         }
 
-        public void AddToCart(int bookId, User user)
+        public void AddToCart(int LaptopId, User user)
         {
             var cart = _dataContext.Carts.Include(c => c.CartItems).FirstOrDefault(c => c.UserId == user.Id);
             if (cart == null)
@@ -37,12 +37,12 @@ namespace DotNet.BookStore.Services
                 _dataContext.Carts.Add(cart);
             }
 
-            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.BookId == bookId);
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.LaptopId == LaptopId);
             if (cartItem == null)
             {
                 cartItem = new CartItem
                 {
-                    BookId = bookId,
+                    LaptopId = LaptopId,
                     CartId = cart.Id,
                     Quantity = 1
                 };
@@ -73,7 +73,7 @@ namespace DotNet.BookStore.Services
         public List<CartItem> GetAllCartItemsByCartId(int cartId)
         {
             return _dataContext.CartItems
-                .Include(ci => ci.Book)
+                .Include(ci => ci.Laptop)
                 .Include(ci => ci.Cart)
                 .Where(ci => ci.CartId == cartId)
                 .ToList();
@@ -98,7 +98,7 @@ namespace DotNet.BookStore.Services
         public CartItem? GetCartItemById(int itemId)
         {
             return _dataContext.CartItems
-                .Include(ci => ci.Book)
+                .Include(ci => ci.Laptop)
                 .Include(ci => ci.Cart)
                 .FirstOrDefault(ci => ci.Id == itemId);
         }

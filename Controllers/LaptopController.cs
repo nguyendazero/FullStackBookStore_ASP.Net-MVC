@@ -7,24 +7,24 @@ using DotNet.BookStore.Services;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNet.BookStore.Controllers
+namespace DotNet.LaptopStore.Controllers
 {
-    public class CartItemController : Controller
+    public class LaptopController : Controller
     {
-        private readonly ICartService _cartService;
         private readonly ILaptopService _laptopService;
-        private readonly ICartItemService _cartItemService;
+        private readonly ICategoryService _categoryService;
+        private readonly IColorService _colorService;
 
-        public CartItemController(ICartService cartService, ILaptopService laptopService, ICartItemService cartItemService)
+        public LaptopController(ILaptopService laptopService, ICategoryService categoryService, IColorService colorService)
         {
-            _cartService = cartService;
             _laptopService = laptopService;
-            _cartItemService = cartItemService;
+            _categoryService = categoryService;
+            _colorService = colorService;
         }
         public IActionResult Index()
         {
-
-            return View();
+            var laptops = _laptopService.GetAllLaptops();
+            return View(laptops);
         }
 
         public IActionResult Create()
@@ -42,7 +42,7 @@ namespace DotNet.BookStore.Controllers
             return View();
         }
 
-        public IActionResult Save(CartItem cartItem)
+        public IActionResult Save(Laptop Laptop)
         {
             return View();
         }

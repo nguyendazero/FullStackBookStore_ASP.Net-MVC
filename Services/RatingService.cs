@@ -12,8 +12,8 @@ namespace DotNet.BookStore.Services
         Rating? GetRatingById(int id);
         Rating? UpdateRating(Rating rating);
         void DeleteRating(int id);
-        List<Rating> GetRatingsByBookId(int bookId);
-        double CalculateAverageStars(int bookId);
+        List<Rating> GetRatingsByLaptopId(int LaptopId);
+        double CalculateAverageStars(int LaptopId);
     }
 
     public class RatingService : IRatingService
@@ -35,7 +35,7 @@ namespace DotNet.BookStore.Services
         public Rating? GetRatingById(int id)
         {
             return _dataContext.Ratings
-                .Include(r => r.Book)
+                .Include(r => r.Laptop)
                 .Include(r => r.User)
                 .FirstOrDefault(r => r.Id == id);
         }
@@ -51,7 +51,7 @@ namespace DotNet.BookStore.Services
                 existingRating.Stars = rating.Stars;
                 existingRating.Content = rating.Content;
                 existingRating.Date = rating.Date;
-                existingRating.BookId = rating.BookId;
+                existingRating.LaptopId = rating.LaptopId;
                 existingRating.UserId = rating.UserId;
 
                 _dataContext.Ratings.Update(existingRating);
@@ -72,17 +72,17 @@ namespace DotNet.BookStore.Services
             }
         }
 
-        public List<Rating> GetRatingsByBookId(int bookId)
+        public List<Rating> GetRatingsByLaptopId(int LaptopId)
         {
             return _dataContext.Ratings
-                .Where(r => r.BookId == bookId)
+                .Where(r => r.LaptopId == LaptopId)
                 .ToList();
         }
 
-        public double CalculateAverageStars(int bookId)
+        public double CalculateAverageStars(int LaptopId)
         {
             var ratings = _dataContext.Ratings
-                .Where(r => r.BookId == bookId)
+                .Where(r => r.LaptopId == LaptopId)
                 .ToList();
 
             if (ratings.Count == 0)

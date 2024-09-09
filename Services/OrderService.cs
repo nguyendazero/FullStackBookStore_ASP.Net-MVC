@@ -15,7 +15,7 @@ namespace DotNet.BookStore.Services
         void DeleteOrder(int id);
         void SaveOrderDetails(List<OrderDetail> orderDetails);
         Order CreateOrder(User user, List<CartItem> cartItems, string paymentMethod, int? couponId);
-        bool HasUserPurchasedBook(User user, int bookId);
+        bool HasUserPurchasedLaptop(User user, int LaptopId);
     }
 
     public class OrderService : IOrderService
@@ -32,7 +32,7 @@ namespace DotNet.BookStore.Services
             return _dataContext.Orders
                 .Where(o => o.UserId == idUser)
                 .Include(o => o.OrderDetails)
-                .ThenInclude(od => od.Book)
+                .ThenInclude(od => od.Laptop)
                 .ToList();
         }
 
@@ -40,7 +40,7 @@ namespace DotNet.BookStore.Services
         {
             return _dataContext.Orders
                 .Include(o => o.OrderDetails)
-                .ThenInclude(od => od.Book)
+                .ThenInclude(od => od.Laptop)
                 .ToList();
         }
 
@@ -55,7 +55,7 @@ namespace DotNet.BookStore.Services
         {
             return _dataContext.Orders
                 .Include(o => o.OrderDetails)
-                .ThenInclude(od => od.Book)
+                .ThenInclude(od => od.Laptop)
                 .FirstOrDefault(o => o.Id == id);
         }
 
@@ -80,10 +80,10 @@ namespace DotNet.BookStore.Services
 
         public Order CreateOrder(User user, List<CartItem> cartItems, string paymentMethod, int? couponId)
         {
-            // Tính tổng số tiền và xử lý Book có thể là null
+            // Tính tổng số tiền và xử lý Laptop có thể là null
             decimal total = (decimal)cartItems
-                .Where(ci => ci.Book != null) // Loại bỏ các CartItem có Book là null
-                .Sum(ci => ci.Quantity * (double)ci.Book!.Price);
+                .Where(ci => ci.Laptop != null) // Loại bỏ các CartItem có Laptop là null
+                .Sum(ci => ci.Quantity * (double)ci.Laptop!.Price);
 
             var order = new Order
             {
@@ -99,13 +99,13 @@ namespace DotNet.BookStore.Services
             _dataContext.SaveChanges();
 
             var orderDetails = cartItems
-                .Where(ci => ci.Book != null) // Loại bỏ các CartItem có Book là null
+                .Where(ci => ci.Laptop != null) // Loại bỏ các CartItem có Laptop là null
                 .Select(ci => new OrderDetail
                 {
                     OrderId = order.Id,
-                    BookId = ci.BookId,
-                    Price = (decimal)ci.Book!.Price, // Chuyển đổi kiểu từ double sang decimal
-                                                     // Add other properties if needed
+                    LaptopId = ci.LaptopId,
+                    Price = (decimal)ci.Laptop!.Price, // Chuyển đổi kiểu từ double sang decimal
+                                                       // Add other properties if needed
                 }).ToList();
 
             SaveOrderDetails(orderDetails);
@@ -114,11 +114,11 @@ namespace DotNet.BookStore.Services
         }
 
 
-        public bool HasUserPurchasedBook(User user, int bookId)
+        public bool HasUserPurchasedLaptop(User user, int LaptopId)
         {
             return _dataContext.Orders
                 .Any(o => o.UserId == user.Id &&
-                          o.OrderDetails.Any(od => od.BookId == bookId));
+                          o.OrderDetails.Any(od => od.LaptopId == LaptopId));
         }
     }
 }

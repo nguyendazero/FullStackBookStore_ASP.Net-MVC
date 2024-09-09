@@ -27,14 +27,14 @@ namespace DotNet.BookStore.Services
         public List<Category> GetAllCategories()
         {
             return _dataContext.Categories
-                .Include(c => c.Books)
+                .Include(c => c.Laptops)
                 .ToList();
         }
 
         public Category? GetCategoryById(int id)
         {
             return _dataContext.Categories
-                .Include(c => c.Books)
+                .Include(c => c.Laptops)
                 .FirstOrDefault(c => c.Id == id);
         }
 
