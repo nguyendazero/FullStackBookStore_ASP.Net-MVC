@@ -1,0 +1,207 @@
+@using DotNet.LaptopStore.Models;
+@using System.Linq
+@model DotNet.LaptopStore.Models.Cart
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/tiny-slider.css">
+    <link rel="stylesheet" type="text/css" href="~/css/cart-index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+</head>
+
+<body>
+
+    <!-- Start Header/Navigation -->
+
+    <!-- End Header/Navigation -->
+
+    <!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Cart</h1>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Hero Section -->
+
+    <div class="untree_co-section before-footer-section">
+        <div class="container">
+            <div class="row mb-5">
+                @if (Model.CartItems == null || !Model.CartItems.Any())
+                {
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="~/images/cart-empty.png" style="height: 80px;" />
+                        </div>
+                        <div class="col-4">
+                            <h1>Your cart is empty</h1>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <form class="col-md-12" method="post">
+                        <div class="site-blocks-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Image</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-total">Total</th>
+                                        <th class="product-remove">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <img src="@item.Laptop?.Image" alt="Image" class="img-fluid"
+                                                    style="height: 170px;" />
+                                            </td>
+                                            <td class="product-name">
+                                                <h2 class="h5 text-black">@item.Laptop?.Name</h2>
+                                            </td>
+                                            <td>@item.Laptop?.Price</td>
+                                            <td>
+                                                <div class="input-group mb-3 d-flex align-items-center quantity-container"
+                                                    style="max-width: 120px;">
+                                                    <div class="input-group-prepend">
+                                                        <a class="btn btn-outline-black decrease" type="button"
+                                                            href="@Url.Action("Minus", "CartItem", new { id = item.Id })">&minus;</a>
+                                                    </div>
+                                                    <input type="text" class="form-control text-center quantity-amount"
+                                                        value="@item.Quantity" placeholder="" />
+                                                    <div class="input-group-append">
+                                                        <a class="btn btn-outline-black increase" type="button"
+                                                            href="@Url.Action("Plus", "CartItem", new { id = item.Id })">&plus;</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>@(item.Laptop?.Price * item.Quantity)</td>
+                                            <td>
+                                                <a onclick="return confirm('Are you sure?')"
+                                                    href="@Url.Action("RemoveToCart", "CartItem", new { id = item.Id })"
+                                                    class="btn btn-black btn-sm">X</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                }
+            </div>
+
+            @if (Model.CartItems != null && Model.CartItems.Any())
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <a class="btn btn-outline-black btn-sm btn-block" href="@Url.Action("Filter", "Book")">
+                                    Continue Shopping
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="text-black h4" for="coupon">Coupon</label>
+                                <p>Enter your coupon code if you have one.</p>
+                            </div>
+                            <form asp-action="ApplyCoupon" asp-controller="Cart">
+                                <div class="col-md-8 mb-3 mb-md-0">
+                                    <input style="margin-bottom: 5px;" type="text" class="form-control py-3 col-md-4"
+                                        name="couponCode" placeholder="Enter coupon code" required />
+                                    <button type="submit" class="btn btn-black col-md-6">Apply Coupon</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-5">
+                        <div class="row justify-content-end">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-12 text-right border-bottom mb-5">
+                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <span class="text-black">Total</span>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <strong class="text-black">@ViewBag.CartTotal</strong>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <span class="text-black">Discounted Total</span>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <strong class="text-black">@ViewBag.CartTotal</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <form action="/cart/checkout" method="get">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-black btn-lg py-3 btn-block">
+                                                Proceed To Checkout
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            <h4 class="alert-heading">Your cart is empty</h4>
+                            <p>Your cart is empty. Start shopping to add items to your cart.</p>
+                            <a class="btn btn-outline-black" href="@Url.Action("Index", "Laptop")">Start Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Start Footer Section -->
+
+    <!-- End Footer Section -->
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/tiny-slider.js"></script>
+    <script src="~/js/custom.js"></script>
+</body>
+
+</html>

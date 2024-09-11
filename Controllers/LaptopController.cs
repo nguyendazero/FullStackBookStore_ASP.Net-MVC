@@ -20,11 +20,32 @@ namespace DotNet.LaptopStore.Controllers
             _categoryService = categoryService;
             _colorService = colorService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string? status, int? categoryId)
         {
-            var laptops = _laptopService.GetAllLaptops();
+            List<Laptop> laptops = new List<Laptop>();
+            var colors = _colorService.GetAllColors();
+            var manufactures = _categoryService.GetAllCategories();
+            ViewBag.Colors = colors;
+            ViewBag.Manufactures = manufactures;
+            if (string.IsNullOrEmpty(status) && categoryId == null)
+            {
+                laptops = _laptopService.GetAllLaptops();
+                ViewBag.Title = "ALL PRODUCT";
+            }
+            else if (!string.IsNullOrEmpty(status))
+            {
+                laptops = _laptopService.GetLaptopsByStatus(status);
+                ViewBag.Title = status;
+            }
+            else if (categoryId != null)
+            {
+                laptops = _laptopService.GetLaptopsByCategory(categoryId.Value);
+                var cate = _categoryService.GetCategoryById(categoryId.Value);
+                ViewBag.Title = cate?.Name;
+            }
             return View(laptops);
         }
+
 
         public IActionResult Create()
         {
@@ -51,5 +72,7 @@ namespace DotNet.LaptopStore.Controllers
             var laptop = _laptopService.GetLaptopById(id);
             return View(laptop);
         }
+
+
     }
 }

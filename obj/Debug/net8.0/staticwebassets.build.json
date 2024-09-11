@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eQL2UNjOssDaoDl/VT0zaG2yeaRQSNrN0593p+pNP+s=",
+  "Hash": "LVjoEJ7G2DM3LtiGPjG49J7PqPPwCcSl/0x+ShBZIh8=",
   "Source": "LaptopStore",
   "BasePath": "_content/LaptopStore",
   "Mode": "Default",
@@ -340,6 +340,25 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css.map"
     },
     {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\cart-index.css",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "css/cart-index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\cart-index.css"
+    },
+    {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\default-skin.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
@@ -604,6 +623,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\tiny-slider.css",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "css/tiny-slider.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\tiny-slider.css"
     },
     {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\favicon.ico",
@@ -1307,6 +1345,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\search-icon.png"
+    },
+    {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\star-icon-empty.png",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "images/star-icon-empty.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\star-icon-empty.png"
     },
     {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\star-icon.png",

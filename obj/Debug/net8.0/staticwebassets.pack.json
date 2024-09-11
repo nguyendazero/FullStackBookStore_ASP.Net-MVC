@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css.map"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\cart-index.css",
+      "PackagePath": "staticwebassets\\css\\cart-index.css"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\default-skin.css",
       "PackagePath": "staticwebassets\\css\\default-skin.css"
     },
@@ -119,6 +123,10 @@
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\style.css",
       "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\tiny-slider.css",
+      "PackagePath": "staticwebassets\\css\\tiny-slider.css"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\favicon.ico",
@@ -267,6 +275,10 @@
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\search-icon.png",
       "PackagePath": "staticwebassets\\images\\search-icon.png"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\star-icon-empty.png",
+      "PackagePath": "staticwebassets\\images\\star-icon-empty.png"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\star-icon.png",

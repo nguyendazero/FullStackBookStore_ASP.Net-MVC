@@ -22,10 +22,19 @@ namespace DotNet.LaptopStore.Controllers
             _userService = userService;
             _couponService = couponService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
+            var cart = _cartService.GetCartByIdUser(id);
+            if (cart.CartItems == null)
+            {
+                cart.CartItems = new List<CartItem>();
+            }
+            double? total = cart.CartItems
+            .Where(item => item.Laptop != null)
+            .Sum(item => item.Laptop?.Price * item.Quantity);
 
-            return View();
+            ViewBag.CartTotal = total;
+            return View(cart);
         }
 
         public IActionResult Create()

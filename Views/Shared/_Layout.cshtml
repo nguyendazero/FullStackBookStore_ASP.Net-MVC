@@ -1,4 +1,11 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using System.Text.Json
+@using DotNet.LaptopStore.Models;
+
+@{
+    var userJson = HttpContextAccessor?.HttpContext?.Session.GetString("User");
+    var user = userJson != null ? JsonSerializer.Deserialize<User>(userJson) : null;
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +32,7 @@
                         <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Laptop/Index">Laptop</a>
+                        <a class="nav-link" href="@Url.Action("Index", "Laptop")">Laptop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="movies.html">Contact</a>
@@ -38,7 +45,7 @@
                     </li>
                 </ul>
                 <div class="search_icon">
-                    @if (HttpContextAccessor.HttpContext?.Session?.GetString("User") != null)
+                    @if (HttpContextAccessor?.HttpContext?.Session?.GetString("User") != null)
                     {
                         <div class="search_icon">
                             <a href="/User/Logout"><img style="height: 25px; max-width: 100%;"
@@ -57,10 +64,16 @@
                 </div>
                 <div class="search_icon">
                     <div class="search_icon">
-                        <a href="/User/Cart"><img style="height: auto; max-width: 40px; margin-right: 10px;"
-                                src="@Url.Content("~/images/Cart.png")"></a>
+                        @if (user != null)
+                        {
+                            <a href="@Url.Action("Index", "Cart", new { id = user.Id })">
+                                <img style="height: auto; max-width: 40px; margin-right: 10px;"
+                                    src="@Url.Content("~/images/Cart.png")">
+                            </a>
+                        }
                     </div>
                 </div>
+
             </div>
         </nav>
     </div>
