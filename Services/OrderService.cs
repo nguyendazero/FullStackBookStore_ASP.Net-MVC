@@ -11,8 +11,8 @@ namespace DotNet.LaptopStore.Services
         List<Order> GetAllOrdersByUserId(int idUser);
         List<Order> GetAllOrders();
         Order SaveOrder(Order order);
-        Order? GetOrderById(int id);
-        void DeleteOrder(int id);
+        Order? GetOrderById(int orderId);
+        void DeleteOrder(int orderId);
         void SaveOrderDetails(List<OrderDetail> orderDetails);
         Order CreateOrder(User user, List<CartItem> cartItems, string paymentMethod, int? couponId);
         bool HasUserPurchasedLaptop(User user, int LaptopId);

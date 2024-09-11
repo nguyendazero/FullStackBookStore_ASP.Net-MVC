@@ -9,10 +9,9 @@ namespace DotNet.LaptopStore.Services
     public interface ICartItemService
     {
         void AddToCart(int LaptopId, User user);
-        void RemoveFromCart(int cartItemId, User user);
         List<CartItem> GetAllCartItemsByCartId(int cartId);
         CartItem SaveCartItem(CartItem cartItem);
-        void DeleteCartItem(int id);
+        void DeleteCartItemById(int id);
         CartItem? GetCartItemById(int itemId);
         void RemoveAllCartItemsByCartId(int cartId);
         string IncreaseQuantity(int cartItemId);
@@ -56,20 +55,6 @@ namespace DotNet.LaptopStore.Services
             _dataContext.SaveChanges();
         }
 
-        public void RemoveFromCart(int cartItemId, User user)
-        {
-            var cartItem = _dataContext.CartItems
-                .Include(ci => ci.Cart)
-                .FirstOrDefault(ci => ci.Id == cartItemId);
-
-            if (cartItem == null || cartItem.Cart?.UserId != user.Id)
-            {
-                return;
-            }
-            _dataContext.CartItems.Remove(cartItem);
-            _dataContext.SaveChanges();
-        }
-
         public List<CartItem> GetAllCartItemsByCartId(int cartId)
         {
             return _dataContext.CartItems
@@ -86,7 +71,7 @@ namespace DotNet.LaptopStore.Services
             return cartItem;
         }
 
-        public void DeleteCartItem(int id)
+        public void DeleteCartItemById(int id)
         {
             var cartItem = _dataContext.CartItems.Find(id);
             if (cartItem == null) return;

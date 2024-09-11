@@ -8,7 +8,7 @@ namespace DotNet.LaptopStore.Services
 {
     public interface IOrderDetailService
     {
-        List<OrderDetail> GetAllOrderDetailByIdOrder(int id);
+        List<OrderDetail> GetAllOrderDetailByIdOrder(int orderid);
 
         OrderDetail SaveOrderDetail(OrderDetail orderDetail);
     }
@@ -22,11 +22,11 @@ namespace DotNet.LaptopStore.Services
             _dataContext = dataContext;
         }
 
-        public List<OrderDetail> GetAllOrderDetailByIdOrder(int id)
+        public List<OrderDetail> GetAllOrderDetailByIdOrder(int orderid)
         {
             return _dataContext.OrderDetails
-                .Where(od => od.OrderId == id)
-                .Include(od => od.Laptop)  // Nếu cần, thêm các liên kết khác
+                .Where(od => od.OrderId == orderid)
+                .Include(od => od.Laptop)
                 .ToList();
         }
 

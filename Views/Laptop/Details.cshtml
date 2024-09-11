@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harry Potter - Book Detail Page</title>
+
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/book-filter2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/book-filter.css">
+
+    <!-- Google Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Fontawesome Link for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+
+<body>
+    <div class="breadcrumb-container">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="http://localhost:8000/book/book-filter" style="color: #6c5dd4">Laptops</a></li>
+            <li><a href="#">
+                    @Model.Name
+                </a></li>
+
+        </ul>
+    </div>
+
+    <section class="book-overview">
+        <div class="img">
+            <img style="width: 2000px;" src="@Model.Image" alt="" />
+        </div>
+        <div class="book-content">
+            <h4>
+                @Model.Name
+            </h4>
+
+            <div class="meta">
+                <div class="review">
+                    <div class="rating">
+                        @for (int i = 0; i < Model.AverageRating; i++)
+                        {
+                            <i class="fa-solid fa-star"></i>
+                        }
+                        <span>
+                            @Model.AverageRating
+                        </span>
+                    </div>
+
+                    <div class="comment-like">
+                        <img src="@Url.Content("~/images/comment.png")" alt="" />
+                        <span>
+                            @Model.Ratings.Count Reviews
+                        </span></small>
+                        <small><img src="@Url.Content("~/images/like.png")" alt="" />
+                            <span>456k Likes</span></small>
+                    </div>
+                </div>
+                <div class="social-btn">
+                    <a href=""><i class="fa-brands fa-facebook-f"></i>Facebook</a>
+                    <a href=""><i class="fa-brands fa-twitter"></i>Twitter</a>
+                    <a href=""><i class="fa-brands fa-whatsapp"></i>Whatsapp</a>
+                    <a href=""><i class="fa-regular fa-envelope"></i>Email</a>
+                </div>
+            </div>
+            <p>
+                @Model.Description
+            </p>
+
+            <div class="footer">
+                <div class="author-detail">
+                    <div class="author">
+                        <small>Manufacture by</small>
+                        <strong>
+                            @Model.Category.Name
+                        </strong>
+                    </div>
+                    <div class="publisher">
+                        <small>Publisher</small>
+                        <strong>Printarea Studios</strong>
+                    </div>
+                    <div class="year">
+                        <small>Year</small>
+                        <strong>2019</strong>
+                    </div>
+                </div>
+                <div class="badge">
+                    <span><i class="fa-solid fa-bolt-lightning"></i>free shipping</span>
+                    <span><i class="fa-solid fa-shield"></i>in stocks</span>
+                </div>
+            </div>
+            <div class="book-price">
+                <div class="price">
+                    <strong>@Model.Price</strong>
+
+                    <span>
+                        @(Math.Round((((Model.Price * 1.2) - Model.Price) / (Model.Price * 1.2) * 100), 2))% off
+                    </span>
+
+                </div>
+                <div class="input-group">
+                    <div class="offer-bottom">
+                        <a href="http://localhost:8000/user/addCart/<%= book._id %>" class="cartbtn">
+                            <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="book-info">
+        <div class="detail-customer">
+            <div class="tabbtns">
+                <button class="tablink" data-btn="detail">Details Product</button>
+                <button class="tablink" data-btn="customer">Customer Reviews</button>
+            </div>
+            <div class="book-detail tabcontent" id="detail">
+                <div class="detail-line">
+                    <strong>Laptop Title</strong><span>
+                        @Model.Name
+                    </span>
+                </div>
+                <div class="detail-line">
+                    <strong>Color</strong><span>
+                        @Model.Color.Name
+                    </span>
+                </div>
+                <div class="detail-line">
+                    <strong>ISBN</strong><span>121341381648(ISBN13: 121341381648)</span>
+                </div>
+                <div class="detail-line">
+                    <strong>Edition Language</strong><span>English</span>
+                </div>
+                <div class="detail-line">
+                    <strong>Book Format</strong><span>Paperback, 450 Pages</span>
+                </div>
+                <div class="detail-line">
+                    <strong>Date Published</strong><span>August 10th 2019</span>
+                </div>
+                <div class="detail-line">
+                    <strong>Publisher</strong><span>Webpress Inc.</span>
+                </div>
+                <div class="detail-line tag-line">
+                    <strong>Tags</strong>
+                    <div class="tags">
+                        <span>Drama</span>
+                        <span>Adventure</span>
+                        <span>Survival</span>
+                        <span>Biography</span>
+                        <span>Bestseller</span>
+                    </div>
+                </div>
+            </div>
+            <div class="customer-review tabcontent" id="customer">
+                <div class="rating">
+                    <div class="rating-info">
+                        <h5>Rating Information</h5>
+                    </div>
+
+                    <div class="star">
+                        <small><span>
+                                @Model.AverageRating
+                            </span>out of 5</small>
+                        <div class="stars">
+                            @for (int i = 0; i < Math.Round(Model.AverageRating); i++)
+                            {
+                                <i class="fa-solid fa-star"></i>
+                            }
+                            @for (int i = (int)Math.Round(Model.AverageRating); i < 5; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <h2 style="color: #6c5dd4;">Bình luận:</h2>
+
+
+
+
+
+
+
+                <form method="post" action="/rating/<%= book._id%>">
+
+                    <input style="min-height: 60px; min-width: 70%; margin-right: 20px;" type="text" id="content"
+                        name="content">
+
+
+                    Đánh giá sao:<input style="height: 30px; width: 50px; margin-left: 10px;" type="number" id="stars"
+                        name="stars" min="1" max="5">
+                    <input style="height: 50px; width: 100px; margin-left: 20px;" type="submit" value="Submit">
+                </form>
+
+                <strong>Showing @Model.Ratings.Count of @Model.Ratings.Count reviews</strong>
+
+                @foreach (var rating in Model.Ratings)
+                {
+                    <div class="reviewer-container">
+                        <div class="review">
+                            <div class="img-detail">
+                                <img src="~/images/man1.png" alt="Reviewer" />
+                                <div class="name">
+                                    <h5>@rating.User.UserName</h5>
+                                    <small>@rating.Date.ToString("d")</small>
+                                </div>
+                            </div>
+                            <div class="review-footer">
+                                <p>@rating.Content</p>
+                                <div class="rating-star">
+                                    @for (int i = 0; i < rating.Stars; i++)
+                                    {
+                                        <i class="fa-solid fa-star"></i>
+                                    }
+                                    @for (int i = rating.Stars; i < 5; i++)
+                                    {
+                                        <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                    }
+                                    <span>@rating.Stars.ToString("0.0")</span>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="post" action="@Url.Action("Delete", "Rating", new { id = rating.Id })"
+                            style="display:inline;">
+                            <button onclick="return confirm('Are you sure?')" type="submit"
+                                style="max-height: 30px; font-size: 10px;">Delete</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
+    <section class="service">
+        <div class="service-container">
+            <div class="service-card">
+                <div class="icon">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <div class="service-content">
+                    <h5>Quick Delivery</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
+                        exercitationem.
+                    </p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="icon">
+                    <i class="fa-solid fa-shield"></i>
+                </div>
+                <div class="service-content">
+                    <h5>Secure Payment</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
+                        exercitationem.
+                    </p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="icon">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                </div>
+                <div class="service-content">
+                    <h5>Best Quality</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
+                        exercitationem.
+                    </p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="service-content">
+                    <h5>Return Guarantee</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
+                        exercitationem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="subscription">
+        <div class="container">
+            <h4>Subscribe our newsletter for Latest <br> books updates</h4>
+            <div class="input">
+                <input type="text" placeholder="Type your email here">
+                <button>subscribe</button>
+            </div>
+        </div>
+        <div class="circle-1"></div>
+        <div class="circle-2"></div>
+    </section>
+
+
+
+    <script>
+        const tabbtn = document.querySelectorAll(".tablink");
+        for (let i = 0; i < tabbtn.length; i++) {
+            tabbtn[i].addEventListener('click', () => {
+                let tabName = tabbtn[i].dataset.btn;
+                let tabContent = document.getElementById(tabName);
+                let AllTabContent = document.querySelectorAll(".tabcontent");
+                let tabbtns = document.querySelectorAll(".tablink");
+                for (let j = 0; j < AllTabContent.length; j++) {
+                    AllTabContent[j].style.display = "none";
+                }
+                tabContent.style.display = "block";
+
+            })
+
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../js/repeat-js.js"></script>
+    <script src="../js/increment-decrement.js"></script>
+
+</body>
+
+</html>

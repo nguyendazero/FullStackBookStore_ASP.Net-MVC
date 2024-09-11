@@ -11,7 +11,6 @@ namespace DotNet.LaptopStore.Models
         [StringLength(100, ErrorMessage = "Laptop name cannot exceed 100 characters")]
         public string Name { get; set; } = string.Empty;  // Tên laptop
 
-        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
         public string Description { get; set; } = string.Empty;  // Mô tả laptop
 
         [Required(ErrorMessage = "Price is required")]

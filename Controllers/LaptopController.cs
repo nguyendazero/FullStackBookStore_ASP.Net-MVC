@@ -45,5 +45,11 @@ namespace DotNet.LaptopStore.Controllers
         {
             return View();
         }
+
+        public IActionResult Details(int id)
+        {
+            var laptop = _laptopService.GetLaptopById(id);
+            return View(laptop);
+        }
     }
 }

@@ -9,13 +9,9 @@ namespace DotNet.LaptopStore.Services
     public interface IColorService
     {
         List<Color> GetAllColors();
-
         Color? GetColorById(int id);
-
         void CreateColor(Color Color);
-
         void UpdateColor(Color Color);
-
         void DeleteColor(int id);
     }
 

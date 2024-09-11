@@ -8,14 +8,13 @@ namespace DotNet.LaptopStore.Services
 {
     public interface ILaptopService
     {
-        List<Laptop> GetAllLaptops(string? keySearch = null, int? categoryId = null, int? authorId = null);
+        List<Laptop> GetAllLaptops(string? keySearch = null, int? categoryId = null, int? colorId = null);
         Laptop? GetLaptopById(int id);
         void UpdateLaptop(Laptop Laptop);
         void CreateLaptop(Laptop Laptop);
         void DeleteLaptop(int id);
-
         List<Laptop> GetLaptopsByCategory(int categoryId);
-        List<Laptop> GetLaptopsByColor(int authorId);
+        List<Laptop> GetLaptopsByColor(int colorId);
         List<Laptop> GetLaptopsByStatus(string status);
         List<Laptop> SearchLaptops(string keySearch);
         List<Laptop> SearchLaptopsByPriceRange(double minPrice, double maxPrice);

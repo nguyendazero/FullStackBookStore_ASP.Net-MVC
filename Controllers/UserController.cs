@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace DotNet.LaptopStore.Controllers
 {
@@ -24,6 +25,38 @@ namespace DotNet.LaptopStore.Controllers
         {
 
             return View();
+        }
+
+        public IActionResult Login()
+        {
+            ViewData["Layout"] = "_SimpleLayout";
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string userName, string password)
+        {
+            var user = _userService.GetUserByUsernameAndPassword(userName, password);
+            if (user != null)
+            {
+                // Chuyển đổi toàn bộ đối tượng người dùng thành chuỗi JSON
+                var userJson = JsonSerializer.Serialize(user);
+                // Lưu chuỗi JSON vào session
+                HttpContext.Session.SetString("User", userJson);
+                return RedirectToAction("Index", "Home"); // Chuyển hướng sau khi đăng nhập
+            }
+            else
+            {
+                ViewBag.Error = "Sai tên đăng nhập hoặc mật khẩu!!";
+                return View();
+            }
+
+        }
+        // Đăng xuất
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Xóa session
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Create()

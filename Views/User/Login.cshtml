@@ -1,0 +1,27 @@
+@{
+    Layout = "_SimpleLayout";
+}
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="userName" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color: red;">@ViewBag.Error</div>
+}

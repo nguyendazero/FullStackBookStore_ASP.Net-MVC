@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\css\\animate.min.css"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\book-filter.css",
+      "PackagePath": "staticwebassets\\css\\book-filter.css"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\book-filter2.css",
+      "PackagePath": "staticwebassets\\css\\book-filter2.css"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\css\\bootstrap-grid.css"
     },
@@ -117,8 +125,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\Cart.png",
+      "PackagePath": "staticwebassets\\images\\Cart.png"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\Logout.png",
+      "PackagePath": "staticwebassets\\images\\Logout.png"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\banner-bg.png",
       "PackagePath": "staticwebassets\\images\\banner-bg.png"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\comment.png",
+      "PackagePath": "staticwebassets\\images\\comment.png"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\couch.png",
@@ -213,12 +233,20 @@
       "PackagePath": "staticwebassets\\images\\instagram-icon.png"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\like.png",
+      "PackagePath": "staticwebassets\\images\\like.png"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\linkedin-icon.png",
       "PackagePath": "staticwebassets\\images\\linkedin-icon.png"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\man1.png",
+      "PackagePath": "staticwebassets\\images\\man1.png"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\newsletter-bg.png",

@@ -11,7 +11,6 @@ namespace DotNet.LaptopStore.Services
         List<LikeRating> GetAllLikeRatings();
         LikeRating? GetLikeRatingById(int id);
         void CreateLikeRating(LikeRating likeRating);
-        void UpdateLikeRating(LikeRating likeRating);
         void DeleteLikeRating(int id);
     }
 
@@ -45,20 +44,6 @@ namespace DotNet.LaptopStore.Services
         public void CreateLikeRating(LikeRating likeRating)
         {
             _dataContext.LikeRatings.Add(likeRating);
-            _dataContext.SaveChanges();
-        }
-
-        public void UpdateLikeRating(LikeRating likeRating)
-        {
-            var existingLikeRating = _dataContext.LikeRatings
-                .FirstOrDefault(lr => lr.Id == likeRating.Id);
-            if (existingLikeRating == null) return;
-
-            existingLikeRating.LaptopId = likeRating.LaptopId;
-            existingLikeRating.UserId = likeRating.UserId;
-            existingLikeRating.RatingId = likeRating.RatingId;
-
-            _dataContext.LikeRatings.Update(existingLikeRating);
             _dataContext.SaveChanges();
         }
 

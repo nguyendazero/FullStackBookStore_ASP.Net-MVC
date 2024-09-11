@@ -13,8 +13,7 @@ namespace DotNet.LaptopStore.Services
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
-
-        User? GetUserByUsernameAndPass(string userName, string password);
+        User? GetUserByUsernameAndPassword(string username, string password);
     }
 
     public class UserService : IUserService
@@ -26,10 +25,9 @@ namespace DotNet.LaptopStore.Services
             _dataContext = dataContext;
         }
 
-        public User? GetUserByUsernameAndPass(string userName, string password)
+        public User? GetUserByUsernameAndPassword(string username, string password)
         {
-            return _dataContext.Users
-                .FirstOrDefault(u => u.UserName == userName && u.Password == password);
+            return _dataContext.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
         }
 
         public List<User> GetAllUsers(string? keySearch = null)

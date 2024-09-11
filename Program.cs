@@ -21,6 +21,9 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddSession(); // Đăng ký dịch vụ Session
+builder.Services.AddHttpContextAccessor(); // Đăng ký IHttpContextAccessor
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession(); // Sử dụng session
 app.UseAuthorization();
 
 app.MapControllerRoute(

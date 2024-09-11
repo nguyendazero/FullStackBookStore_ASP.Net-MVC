@@ -14,7 +14,6 @@ namespace DotNet.LaptopStore.Services
         void DeleteCart(int id);
         Cart ViewCart(User user);
         double ApplyCoupon(User user, string couponCode);
-        void ClearCartItems(User user);
     }
 
     public class CartService : ICartService
@@ -93,18 +92,6 @@ namespace DotNet.LaptopStore.Services
 
             _dataContext.SaveChanges();
             return discountedTotal;
-        }
-
-
-        public void ClearCartItems(User user)
-        {
-            var cart = GetCartByIdUser(user.Id);
-
-            if (cart != null)
-            {
-                _dataContext.CartItems.RemoveRange(cart.CartItems);
-                _dataContext.SaveChanges();
-            }
         }
     }
 }
