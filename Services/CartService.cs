@@ -14,6 +14,8 @@ namespace DotNet.LaptopStore.Services
         void DeleteCart(int id);
         Cart ViewCart(User user);
         double ApplyCoupon(User user, string couponCode);
+
+        void AddToCart(int LaptopId, User user);
     }
 
     public class CartService : ICartService
@@ -92,6 +94,34 @@ namespace DotNet.LaptopStore.Services
 
             _dataContext.SaveChanges();
             return discountedTotal;
+        }
+
+        public void AddToCart(int LaptopId, User user)
+        {
+            var cart = _dataContext.Carts.Include(c => c.CartItems).FirstOrDefault(c => c.UserId == user.Id);
+            if (cart == null)
+            {
+                cart = new Cart { UserId = user.Id };
+                _dataContext.Carts.Add(cart);
+            }
+
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.LaptopId == LaptopId);
+            if (cartItem == null)
+            {
+                cartItem = new CartItem
+                {
+                    LaptopId = LaptopId,
+                    CartId = cart.Id,
+                    Quantity = 1
+                };
+                cart.CartItems.Add(cartItem);
+            }
+            else
+            {
+                cartItem.Quantity += 1;
+            }
+
+            _dataContext.SaveChanges();
         }
     }
 }

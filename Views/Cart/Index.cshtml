@@ -2,7 +2,6 @@
 @using System.Linq
 @model DotNet.LaptopStore.Models.Cart
 
-
 <!doctype html>
 <html lang="en">
 
@@ -21,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/tiny-slider.css">
     <link rel="stylesheet" type="text/css" href="~/css/cart-index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+    <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co</title>
 </head>
 
 <body>
@@ -95,7 +94,7 @@
                                                             href="@Url.Action("Minus", "CartItem", new { id = item.Id })">&minus;</a>
                                                     </div>
                                                     <input type="text" class="form-control text-center quantity-amount"
-                                                        value="@item.Quantity" placeholder="" />
+                                                        value="@item.Quantity" placeholder="" readonly />
                                                     <div class="input-group-append">
                                                         <a class="btn btn-outline-black increase" type="button"
                                                             href="@Url.Action("Plus", "CartItem", new { id = item.Id })">&plus;</a>
@@ -131,15 +130,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="text-black h4" for="coupon">Coupon</label>
-                                <p>Enter your coupon code if you have one.</p>
+                                <h4>Enter your coupon code if you have one.</h4>
                             </div>
-                            <form asp-action="ApplyCoupon" asp-controller="Cart">
+                            <form asp-action="ApplyCoupon" asp-controller="Cart" method="post">
                                 <div class="col-md-8 mb-3 mb-md-0">
-                                    <input style="margin-bottom: 5px;" type="text" class="form-control py-3 col-md-4"
+                                    <input style="margin-bottom: 5px; width: 80%;" type="text" class="form-control py-3"
                                         name="couponCode" placeholder="Enter coupon code" required />
                                     <button type="submit" class="btn btn-black col-md-6">Apply Coupon</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                     <div class="col-md-6 pl-5">
@@ -150,12 +150,20 @@
                                         <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                     </div>
                                 </div>
+                                @if (TempData["CouponError"] != null)
+                                {
+                                    <div class="alert alert-danger mt-3" role="alert">
+                                        @TempData["CouponError"]
+                                    </div>
+                                }
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <span class="text-black">Total</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">@ViewBag.CartTotal</strong>
+                                        <strong class="text-black">
+                                            @ViewBag.CartTotal
+                                        </strong>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
@@ -163,7 +171,16 @@
                                         <span class="text-black">Discounted Total</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">@ViewBag.CartTotal</strong>
+                                        <strong class="text-black">
+                                            @if (TempData["discountedTotal"] != null)
+                                            {
+                                                @TempData["discountedTotal"]
+                                            }
+                                            else
+                                            {
+                                                @ViewBag.CartTotal
+                                            }
+                                        </strong>
                                     </div>
                                 </div>
                                 <div class="row">

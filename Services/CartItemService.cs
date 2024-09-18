@@ -8,7 +8,7 @@ namespace DotNet.LaptopStore.Services
 {
     public interface ICartItemService
     {
-        void AddToCart(int LaptopId, User user);
+
         List<CartItem> GetAllCartItemsByCartId(int cartId);
         CartItem SaveCartItem(CartItem cartItem);
         void DeleteCartItemById(int id);
@@ -25,34 +25,6 @@ namespace DotNet.LaptopStore.Services
         public CartItemService(DataContext dataContext)
         {
             _dataContext = dataContext;
-        }
-
-        public void AddToCart(int LaptopId, User user)
-        {
-            var cart = _dataContext.Carts.Include(c => c.CartItems).FirstOrDefault(c => c.UserId == user.Id);
-            if (cart == null)
-            {
-                cart = new Cart { UserId = user.Id };
-                _dataContext.Carts.Add(cart);
-            }
-
-            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.LaptopId == LaptopId);
-            if (cartItem == null)
-            {
-                cartItem = new CartItem
-                {
-                    LaptopId = LaptopId,
-                    CartId = cart.Id,
-                    Quantity = 1
-                };
-                cart.CartItems.Add(cartItem);
-            }
-            else
-            {
-                cartItem.Quantity += 1;
-            }
-
-            _dataContext.SaveChanges();
         }
 
         public List<CartItem> GetAllCartItemsByCartId(int cartId)

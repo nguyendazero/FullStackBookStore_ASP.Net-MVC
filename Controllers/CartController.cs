@@ -5,22 +5,25 @@ using System.Threading.Tasks;
 using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace DotNet.LaptopStore.Controllers
 {
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
+        private readonly ICartItemService _cartItemService;
         private readonly ILaptopService _laptopService;
         private readonly IUserService _userService;
         private readonly ICouponService _couponService;
 
-        public CartController(ICartService cartService, ILaptopService laptopService, IUserService userService, ICouponService couponService)
+        public CartController(ICartService cartService, ILaptopService laptopService, IUserService userService, ICouponService couponService, ICartItemService cartItemService)
         {
             _cartService = cartService;
             _laptopService = laptopService;
             _userService = userService;
             _couponService = couponService;
+            _cartItemService = cartItemService;
         }
         public IActionResult Index(int id)
         {
@@ -55,6 +58,59 @@ namespace DotNet.LaptopStore.Controllers
         public IActionResult Save(Cart cart)
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult AddToCart(int id)
+        {
+            var userJson = HttpContext.Session.GetString("User");
+
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = JsonSerializer.Deserialize<User>(userJson);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            _cartService.AddToCart(id, user);
+
+            return RedirectToAction("Index", "Cart", new { id = user.Id });
+        }
+
+        [HttpPost]
+        public IActionResult ApplyCoupon(string couponCode)
+        {
+            var userJson = HttpContext.Session.GetString("User");
+
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = JsonSerializer.Deserialize<User>(userJson);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            // Áp dụng mã giảm giá và tính tổng tiền sau khi giảm
+            double discountedTotal = _cartService.ApplyCoupon(user, couponCode);
+
+            if (discountedTotal > 0)
+            {
+                TempData["discountedTotal"] = discountedTotal.ToString();
+            }
+            else
+            {
+                TempData["CouponError"] = "Invalid or expired coupon.";
+            }
+            return RedirectToAction("Index", "Cart", new { id = user.Id });
         }
     }
 }

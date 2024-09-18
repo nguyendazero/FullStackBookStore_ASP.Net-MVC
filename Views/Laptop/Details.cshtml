@@ -109,7 +109,7 @@
                 </div>
                 <div class="input-group">
                     <div class="offer-bottom">
-                        <a href="http://localhost:8000/user/addCart/<%= book._id %>" class="cartbtn">
+                        <a href="@Url.Action("AddToCart", "Cart", new { id = @Model.Id })">
                             <i class="fa-solid fa-cart-shopping"></i>Add to cart
                         </a>
                     </div>
