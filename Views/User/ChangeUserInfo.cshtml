@@ -1,0 +1,152 @@
+@model DotNet.LaptopStore.Models.User
+
+@{
+    Layout = "_SimpleLayout";
+    ViewBag.Title = "Change User Information";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/tiny-slider.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <title>Thay Đổi Thông Tin Người Dùng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Thay Đổi Thông Tin Người Dùng</h2>
+        @using (Html.BeginForm("ChangeUserInfo", "User", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FullName)
+                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address)
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateOfBirth)
+                @Html.TextBoxFor(model => model.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Telephone)
+                @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gender)
+                @Html.DropDownListFor(model => model.Gender, new SelectList(new[] { "Male", "Female", "Other" }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit">Cập Nhật Thông Tin</button>
+            </div>
+        }
+        @if (TempData["success"] != null)
+        {
+            <div style="color: green;">
+                @TempData["success"]
+            </div>
+        }
+        <form action="@Url.Action("Index", "Home")">
+            <button>Quay lại trang chủ</button>
+        </form>
+    </div>
+</body>
+
+</html>

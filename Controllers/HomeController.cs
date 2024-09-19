@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using DotNet.LaptopStore.Models;
 using LaptopStore.Models;
 
 namespace DotNet.LaptopStore.Controllers;
@@ -15,8 +17,20 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        string? userJson = HttpContext.Session.GetString("User");
+
+        User? user = null;
+
+        if (!string.IsNullOrEmpty(userJson))
+        {
+            user = JsonSerializer.Deserialize<User>(userJson);
+        }
+
+        ViewBag.FullName = user?.FullName ?? "";
+
         return View();
     }
+
 
     public IActionResult Privacy()
     {

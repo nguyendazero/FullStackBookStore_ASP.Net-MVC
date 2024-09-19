@@ -16,6 +16,53 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LaptopStore.styles.css" asp-append-version="true" />
+    <style>
+        .search_icon {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dropdown-menu {
+            width: 500px;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,21 +94,33 @@
                 <div class="search_icon">
                     @if (HttpContextAccessor?.HttpContext?.Session?.GetString("User") != null)
                     {
-                        <div class="search_icon">
-                            <a href="/User/Logout"><img style="height: 25px; max-width: 100%;"
-                                    src="@Url.Content("~/images/Logout.png")"><span
-                                    class="padding_left_15">Logout</span></a>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle">
+                                <span class="padding_left_15">@ViewBag.FullName</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="/User/ChangePassword_Page">Change Password</a>
+                                <a href="@Url.Action("ChangeUserInfo", "User", new { id = user?.Id })">Update Profile</a>
+                                <a href="/User/UpdateProfile">Orders History</a>
+                                <a href="/User/UpdateProfile">Settings</a>
+                                <li>
+                                    <hr>
+                                </li>
+                                <a href="@Url.Action("Logout", "User")">Logout</a>
+                            </div>
                         </div>
                     }
                     else
                     {
                         <div class="search_icon">
-                            <a href="/User/Login"><img style="height: 25px; max-width: 100%;"
-                                    src="@Url.Content("~/images/user-icon.png")"><span
-                                    class="padding_left_7">Login</span></a>
+                            <a href="/User/Login">
+                                <img style="height: 25px; max-width: 100%;" src="@Url.Content("~/images/user-icon.png")">
+                                <span class="padding_left_7">Login</span>
+                            </a>
                         </div>
                     }
                 </div>
+
                 <div class="search_icon">
                     <div class="search_icon">
                         @if (user != null)

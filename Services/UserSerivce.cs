@@ -14,6 +14,8 @@ namespace DotNet.LaptopStore.Services
         void UpdateUser(User user);
         void DeleteUser(int id);
         User? GetUserByUsernameAndPassword(string username, string password);
+        Task<User?> GetUserByIdAsync(int id);
+        Task UpdateUserAsync(User user);
     }
 
     public class UserService : IUserService
@@ -85,6 +87,17 @@ namespace DotNet.LaptopStore.Services
 
             _dataContext.Users.Remove(user);
             _dataContext.SaveChanges();
+        }
+
+        public async Task<User?> GetUserByIdAsync(int id)
+        {
+            return await _dataContext.Users.FindAsync(id);
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            _dataContext.Update(user);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }
