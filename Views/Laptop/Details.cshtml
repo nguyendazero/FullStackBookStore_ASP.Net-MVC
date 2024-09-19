@@ -27,7 +27,7 @@
     <div class="breadcrumb-container">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="http://localhost:8000/book/book-filter" style="color: #6c5dd4">Laptops</a></li>
+            <li><a href="@Url.Action("Index","Laptop")" style="color: #6c5dd4">Laptops</a></li>
             <li><a href="#">
                     @Model.Name
                 </a></li>
@@ -107,13 +107,34 @@
                     </span>
 
                 </div>
-                <div class="input-group">
-                    <div class="offer-bottom">
-                        <a href="@Url.Action("AddToCart", "Cart", new { id = @Model.Id })">
-                            <i class="fa-solid fa-cart-shopping"></i>Add to cart
-                        </a>
+                @if (Model.Status != "runout")
+                {
+                    <div class="input-group">
+                        <div class="offer-bottom">
+                            <a href="@Url.Action("AddToCart", "Cart", new { id = Model.Id })"
+                                style="background-color: #3c0e0e; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">
+                                <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                            </a>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="input-group">
+                        <div class="offer-bottom">
+                            <span
+                                style="background-color: #ddd; color: #999; padding: 10px 20px; border-radius: 5px; display: inline-block; font-weight: bold; text-align: center;">
+                                Đã hết hàng
+                            </span>
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+
             </div>
         </div>
     </section>

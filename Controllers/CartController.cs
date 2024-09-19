@@ -33,12 +33,24 @@ namespace DotNet.LaptopStore.Controllers
                 cart.CartItems = new List<CartItem>();
             }
             double? total = cart.CartItems
-            .Where(item => item.Laptop != null)
-            .Sum(item => item.Laptop?.Price * item.Quantity);
+                .Where(item => item.Laptop != null)
+                .Sum(item => item.Laptop?.Price * item.Quantity);
 
             ViewBag.CartTotal = total;
+
+            // Kiểm tra TempData và gán giá trị cho ViewBag nếu có giá trị discount
+            if (TempData["discountedTotal"] != null)
+            {
+                ViewBag.DiscountTotal = TempData["discountedTotal"];
+            }
+            else
+            {
+                ViewBag.DiscountTotal = total; // Nếu không có giảm giá, dùng tổng giỏ hàng
+            }
+
             return View(cart);
         }
+
 
         public IActionResult Create()
         {
@@ -111,6 +123,14 @@ namespace DotNet.LaptopStore.Controllers
                 TempData["CouponError"] = "Invalid or expired coupon.";
             }
             return RedirectToAction("Index", "Cart", new { id = user.Id });
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(List<CartItem> CartItems, double Total, double DiscountTotal)
+        {
+            ViewBag.Total = Total;
+            ViewBag.DiscountTotal = DiscountTotal;
+            return View(CartItems);
         }
     }
 }

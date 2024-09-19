@@ -1,7 +1,6 @@
 @using DotNet.LaptopStore.Models;
 @using System.Linq
-
-@model DotNet.LaptopStore.Models.Cart
+@model List<CartItem>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +14,7 @@
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <link href="~/css/tiny-slider.css" rel="stylesheet" />
@@ -121,7 +121,7 @@
                 <div class="col-md-6">
                     <h2 class="h3 mb-3 text-black">Your Order</h2>
                     <div class="p-3 p-lg-5 border bg-white">
-                        <table class="table site-block-order-table mb-5">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -131,60 +131,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (ViewBag.CartItems is IEnumerable<CartItem> cartItems)
-                                {
-                                    foreach (var item in cartItems)
-                                    {
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <img src="@item.Laptop?.Image ?? " ~/images/default-image.png" alt="Image"
-                                                    class="img-fluid" style="height: 170px;" />
-                                            </td>
-                                            <td class="product-name">
-                                                <h2 class="h5 text-black">@item.Laptop?.Name ?? "Unknown Product"</h2>
-                                            </td>
-                                            <td>@item.Laptop?.Price.ToString("C") ?? "$0.00"</td>
-                                            <td>@item.Quantity</td>
-                                            <td>@(item.Laptop?.Price * item.Quantity).ToString("C")</td>
-                                        </tr>
-                                    }
-                                }
-                                else
+                                @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td colspan="5">Your cart is empty</td>
+                                        <td>@item.Laptop?.Name</td>
+                                        <td>@item.Laptop?.Price</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@(item.Laptop?.Price * item.Quantity)</td>
                                     </tr>
                                 }
 
+
                                 <tr>
                                     <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                    <td class="text-black">
-                                        @{
-                                            double cartTotal = 0;
-                                            double.TryParse(TempData["CartTotal"]?.ToString(), out cartTotal);
-                                        }
-                                        @cartTotal.ToString("C")
-                                    </td>
+                                    <td class="text-black"><strong>@ViewBag.Total</td>
                                 </tr>
                                 <tr>
                                     <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                    <td class="text-black font-weight-bold">
-                                        <strong>
-                                            @{
-                                                double discountedTotal = 0;
-                                                double.TryParse(TempData["DiscountedTotal"]?.ToString(), out
-                                                discountedTotal);
-                                                if (discountedTotal == 0)
-                                                {
-                                                    double.TryParse(TempData["CartTotal"]?.ToString(), out discountedTotal);
-                                                }
-                                            }
-                                            @discountedTotal.ToString("C")
-                                        </strong>
-                                    </td>
+                                    <td class="text-black"><strong>@ViewBag.DiscountTotal</td>đ
                                 </tr>
                             </tbody>
                         </table>
+
+
 
                         <!-- Payment Methods Form -->
                         <div class="border p-4 rounded" role="alert">
@@ -210,7 +179,7 @@
                                     <label class="form-check-label" for="paypal">Paypal</label>
                                 </div>
 
-                                <button type="submit" class="btn btn-black btn-lg py-3 btn-block">Proceed To
+                                <button type="submit" class="btn btn-success btn-lg py-3">Proceed To
                                     Checkout</button>
                             </form>
                         </div>

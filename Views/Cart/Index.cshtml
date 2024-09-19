@@ -2,6 +2,7 @@
 @using System.Linq
 @model DotNet.LaptopStore.Models.Cart
 
+
 <!doctype html>
 <html lang="en">
 
@@ -89,12 +90,16 @@
                                             <td>
                                                 <div class="input-group mb-3 d-flex align-items-center quantity-container"
                                                     style="max-width: 120px;">
+                                                    
                                                     <div class="input-group-prepend">
                                                         <a class="btn btn-outline-black decrease" type="button"
                                                             href="@Url.Action("Minus", "CartItem", new { id = item.Id })">&minus;</a>
                                                     </div>
-                                                    <input type="text" class="form-control text-center quantity-amount"
-                                                        value="@item.Quantity" placeholder="" readonly />
+
+                                                    <input type="text" name="Quantities" class="form-control text-center quantity-amount"
+                                                        value="@item.Quantity" readonly />
+                                                    <input type="hidden" name="CartItemIds" value="@item.Id" />
+
                                                     <div class="input-group-append">
                                                         <a class="btn btn-outline-black increase" type="button"
                                                             href="@Url.Action("Plus", "CartItem", new { id = item.Id })">&plus;</a>
@@ -122,7 +127,7 @@
                     <div class="col-md-6">
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <a class="btn btn-outline-black btn-sm btn-block" href="@Url.Action("Filter", "Book")">
+                                <a class="btn btn-outline-black btn-sm btn-block" href="@Url.Action("Index", "Laptop")">
                                     Continue Shopping
                                 </a>
                             </div>
@@ -184,14 +189,29 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <form action="/cart/checkout" method="get">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-black btn-lg py-3 btn-block">
-                                                Proceed To Checkout
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                <form asp-action="Checkout" asp-controller="Cart" method="post">
+                                    <div class="col-md-12">
+                                        <!-- Vòng lặp qua các CartItems -->
+                                        @for (int i = 0; i < Model.CartItems.Count; i++)
+                                        {
+                                            var item = Model.CartItems.ElementAt(i);
+                                            <!-- Thêm input ẩn để lưu các thông tin cần gửi -->
+                                            <input type="hidden" name="CartItems[@i].Id" value="@item.Id" />
+                                            <input type="hidden" name="CartItems[@i].Quantity" value="@item.Quantity" />
+                                            <input type="hidden" name="CartItems[@i].Laptop.Price" value="@item.Laptop?.Price" />
+                                            <input type="hidden" name="CartItems[@i].Laptop.Name" value="@item.Laptop?.Name" />
+                                        }
+
+                                        <!-- Input ẩn để gửi tổng cộng (Total) và tổng sau giảm giá (DiscountTotal) -->
+                                        <input type="hidden" name="Total" value="@ViewBag.CartTotal" />
+                                        <input type="hidden" name="DiscountTotal" value="@ViewBag.DiscountTotal" />
+
+                                        <button type="submit" class="btn btn-black btn-lg py-3 btn-block">
+                                            Proceed To Checkout
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
