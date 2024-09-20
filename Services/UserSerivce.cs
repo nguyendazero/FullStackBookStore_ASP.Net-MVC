@@ -29,8 +29,14 @@ namespace DotNet.LaptopStore.Services
 
         public User? GetUserByUsernameAndPassword(string username, string password)
         {
-            return _dataContext.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
+            var user = _dataContext.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
+            if (user == null)
+            {
+                Console.WriteLine("No user found with the provided username and password");
+            }
+            return user;
         }
+
 
         public List<User> GetAllUsers(string? keySearch = null)
         {

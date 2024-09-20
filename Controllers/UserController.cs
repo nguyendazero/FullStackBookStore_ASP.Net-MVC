@@ -27,15 +27,17 @@ namespace DotNet.LaptopStore.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login_Page()
         {
-            ViewData["Layout"] = "_SimpleLayout";
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string userName, string password)
+        public IActionResult Login()
         {
+            string userName = Request.Form["username"].FirstOrDefault() ?? string.Empty;
+            string password = Request.Form["password"].FirstOrDefault() ?? string.Empty;
+
             var user = _userService.GetUserByUsernameAndPassword(userName, password);
             if (user != null)
             {
@@ -48,10 +50,10 @@ namespace DotNet.LaptopStore.Controllers
             else
             {
                 ViewBag.Error = "Sai tên đăng nhập hoặc mật khẩu!!";
-                return View();
+                return View("Login_Page");
             }
-
         }
+
         // Đăng xuất
         public IActionResult Logout()
         {
@@ -168,6 +170,20 @@ namespace DotNet.LaptopStore.Controllers
             _userService.UpdateUser(user);
             TempData["success"] = "Thay đổi thông tin thành công.";
             return RedirectToAction("ChangeUserInfo", "User");
+        }
+
+        public IActionResult Register_Page()
+        {
+            return View();
+        }
+
+        public IActionResult Register(User newUser)
+        {
+            newUser.UserName = newUser.UserName.Trim();
+            newUser.Password = newUser.Password.Trim();
+            _userService.CreateUser(newUser);
+            ViewBag.Success = "Đăng ký thành công, hãy đăng nhập!";
+            return View("Login_Page");
         }
     }
 }
