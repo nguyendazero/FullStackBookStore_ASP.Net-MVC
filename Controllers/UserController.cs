@@ -179,6 +179,15 @@ namespace DotNet.LaptopStore.Controllers
 
         public IActionResult Register(User newUser)
         {
+            var existUser = _userService.GetAllUsers();
+            foreach (var user in existUser)
+            {
+                if (user.UserName.Equals(newUser.UserName.Trim()))
+                {
+                    ViewBag.error = "Username đã tồn tại!";
+                    return View("Register_Page");
+                }
+            }
             newUser.UserName = newUser.UserName.Trim();
             newUser.Password = newUser.Password.Trim();
             _userService.CreateUser(newUser);
