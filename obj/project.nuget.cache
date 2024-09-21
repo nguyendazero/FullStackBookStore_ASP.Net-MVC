@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PwjVdS9/RrR/MPO+ekGfMiBt5NxsnvkekPn4Ba3v4cB3tnyz5HNjReOV5uOnNeuusxCz9gH54OvEfl+ELOuc/A==",
+  "dgSpecHash": "laUMqNVJzwHCvB5n7Jf2g+GEoF1WsgeFq4cyAycY6RWbD7j6UF05O/ZWQaJlsv0TugWKny+ILDGloFM/i030tQ==",
   "success": true,
   "projectFilePath": "D:\\DotNet\\LaptopStore\\LaptopStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

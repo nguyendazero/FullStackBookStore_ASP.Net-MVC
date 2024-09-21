@@ -6,6 +6,7 @@ using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using BCrypt.Net;
 
 namespace DotNet.LaptopStore.Controllers
 {
@@ -38,8 +39,8 @@ namespace DotNet.LaptopStore.Controllers
             string userName = Request.Form["username"].FirstOrDefault() ?? string.Empty;
             string password = Request.Form["password"].FirstOrDefault() ?? string.Empty;
 
-            var user = _userService.GetUserByUsernameAndPassword(userName, password);
-            if (user != null)
+            var user = _userService.GetUserByUsername(userName.Trim());
+            if (user != null && BCrypt.Net.BCrypt.Verify(password.Trim(), user.Password))
             {
                 // Chuyển đổi toàn bộ đối tượng người dùng thành chuỗi JSON
                 var userJson = JsonSerializer.Serialize(user);
@@ -53,6 +54,7 @@ namespace DotNet.LaptopStore.Controllers
                 return View("Login_Page");
             }
         }
+
 
         // Đăng xuất
         public IActionResult Logout()
@@ -87,7 +89,7 @@ namespace DotNet.LaptopStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangPassword()
+        public IActionResult ChangePassword()
         {
             var userJson = HttpContext.Session.GetString("User");
 
@@ -107,7 +109,8 @@ namespace DotNet.LaptopStore.Controllers
             string newPassword = Request.Form["newPassword"].FirstOrDefault() ?? string.Empty;
             string confirmPassword = Request.Form["confirmPassword"].FirstOrDefault() ?? string.Empty;
 
-            if (!currentPassword.Equals(user.Password))
+            // Kiểm tra mật khẩu hiện tại bằng cách sử dụng BCrypt để so sánh
+            if (!BCrypt.Net.BCrypt.Verify(currentPassword, user.Password))
             {
                 TempData["error"] = "Mật khẩu hiện tại không đúng!";
             }
@@ -115,19 +118,21 @@ namespace DotNet.LaptopStore.Controllers
             {
                 TempData["error"] = "Mật khẩu nhập lại không khớp!";
             }
-            else if (currentPassword.Equals(newPassword))
+            else if (BCrypt.Net.BCrypt.Verify(newPassword, user.Password))
             {
                 TempData["error"] = "Mật khẩu mới không được trùng với mật khẩu cũ!";
             }
             else
             {
-                TempData["success"] = "Đã thay đổi mật khẩu thành công";
-                user.Password = newPassword;
+                // Mã hóa mật khẩu mới trước khi cập nhật
+                user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
                 _userService.UpdateUser(user);
+                TempData["success"] = "Đã thay đổi mật khẩu thành công";
             }
 
             return RedirectToAction("ChangePassword_Page", "User");
         }
+
 
         public async Task<IActionResult> ChangeUserInfo(int id)
         {
@@ -188,8 +193,10 @@ namespace DotNet.LaptopStore.Controllers
                     return View("Register_Page");
                 }
             }
+
             newUser.UserName = newUser.UserName.Trim();
-            newUser.Password = newUser.Password.Trim();
+            newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password.Trim());
+
             _userService.CreateUser(newUser);
             ViewBag.Success = "Đăng ký thành công, hãy đăng nhập!";
             return View("Login_Page");

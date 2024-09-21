@@ -13,6 +13,7 @@ namespace DotNet.LaptopStore.Services
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(int id);
+        public User? GetUserByUsername(string username);
         User? GetUserByUsernameAndPassword(string username, string password);
         Task<User?> GetUserByIdAsync(int id);
         Task UpdateUserAsync(User user);
@@ -25,6 +26,11 @@ namespace DotNet.LaptopStore.Services
         public UserService(DataContext dataContext)
         {
             _dataContext = dataContext;
+        }
+
+        public User? GetUserByUsername(string username)
+        {
+            return _dataContext.Users.FirstOrDefault(u => u.UserName == username);
         }
 
         public User? GetUserByUsernameAndPassword(string username, string password)
