@@ -79,6 +79,7 @@ namespace DotNet.LaptopStore.Controllers
 
             if (string.IsNullOrEmpty(userJson))
             {
+                Console.WriteLine("User session is null or empty.");
                 return RedirectToAction("Login", "User");
             }
 
@@ -93,6 +94,7 @@ namespace DotNet.LaptopStore.Controllers
 
             return RedirectToAction("Index", "Cart", new { id = user.Id });
         }
+
 
         [HttpPost]
         public IActionResult ApplyCoupon(string couponCode)
@@ -117,6 +119,13 @@ namespace DotNet.LaptopStore.Controllers
             if (discountedTotal > 0)
             {
                 TempData["discountedTotal"] = discountedTotal.ToString();
+                Coupon? coupon = _couponService.GetCouponByCode(couponCode);
+
+                if (coupon != null)
+                {
+                    HttpContext.Session.SetInt32("couponId", coupon.Id);
+                    Console.WriteLine(coupon.ToString());
+                }
             }
             else
             {

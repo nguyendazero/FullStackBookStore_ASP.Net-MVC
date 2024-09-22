@@ -21,10 +21,18 @@ namespace DotNet.LaptopStore.Services
     public class OrderService : IOrderService
     {
         private readonly DataContext _dataContext;
+        private readonly ICouponService _couponService;
 
-        public OrderService(DataContext dataContext)
+        private readonly ILaptopService _laptopService;
+
+
+
+        public OrderService(DataContext dataContext, ICouponService couponService, ILaptopService laptopService)
         {
             _dataContext = dataContext;
+            _couponService = couponService;
+            _laptopService = laptopService;
+
         }
 
         public List<Order> GetAllOrdersByUserId(int idUser)
@@ -82,9 +90,17 @@ namespace DotNet.LaptopStore.Services
         {
             // Tính tổng số tiền và xử lý Laptop có thể là null
             decimal total = (decimal)cartItems
-                .Where(ci => ci.Laptop != null) // Loại bỏ các CartItem có Laptop là null
                 .Sum(ci => ci.Quantity * (double)ci.Laptop!.Price);
 
+            if (couponId.HasValue)
+            {
+                Coupon? coupon = _couponService.GetCouponById(couponId.Value);
+                if (coupon != null)
+                {
+                    decimal discountedTotal = total - (total * coupon.Discount) / 100;
+                    total = discountedTotal;
+                }
+            }
             var order = new Order
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
@@ -95,21 +111,36 @@ namespace DotNet.LaptopStore.Services
                 CouponId = couponId
             };
 
+
+
             _dataContext.Orders.Add(order);
             _dataContext.SaveChanges();
 
             var orderDetails = cartItems
-                .Where(ci => ci.Laptop != null) // Loại bỏ các CartItem có Laptop là null
+                .Where(ci => ci.Laptop != null)
                 .Select(ci => new OrderDetail
                 {
+                    Quantity = ci.Quantity,
                     OrderId = order.Id,
                     LaptopId = ci.LaptopId,
-                    Price = (decimal)ci.Laptop!.Price, // Chuyển đổi kiểu từ double sang decimal
-                                                       // Add other properties if needed
+                    Price = (decimal)ci.Laptop!.Price,
+
                 }).ToList();
 
             SaveOrderDetails(orderDetails);
 
+            foreach (var orderDetail in orderDetails)
+            {
+                var laptop = _laptopService.GetLaptopById(orderDetail.LaptopId);
+                if (laptop != null)
+                {
+                    laptop.Quantity -= orderDetail.Quantity;
+                    laptop.Status = laptop.Quantity == 0 ? "runout" : laptop.Status;
+                    _dataContext.Laptops.Update(laptop);
+                    _dataContext.SaveChanges();
+                }
+
+            }
             return order;
         }
 

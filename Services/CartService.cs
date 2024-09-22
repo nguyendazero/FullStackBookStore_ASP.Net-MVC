@@ -8,14 +8,15 @@ namespace DotNet.LaptopStore.Services
 {
     public interface ICartService
     {
-        Cart SaveCart(Cart cart);
+        Cart CreateCart(Cart cart);
         Cart GetCartByIdUser(int userId);
         void UpdateCart(Cart cart);
         void DeleteCart(int id);
         Cart ViewCart(User user);
         double ApplyCoupon(User user, string couponCode);
-
         void AddToCart(int LaptopId, User user);
+
+
     }
 
     public class CartService : ICartService
@@ -26,6 +27,15 @@ namespace DotNet.LaptopStore.Services
         {
             _dataContext = dataContext;
         }
+
+
+        public Cart CreateCart(Cart cart)
+        {
+            _dataContext.Carts.Add(cart);
+            _dataContext.SaveChanges();
+            return cart;
+        }
+
 
         public Cart SaveCart(Cart cart)
         {
@@ -123,5 +133,7 @@ namespace DotNet.LaptopStore.Services
 
             _dataContext.SaveChanges();
         }
+
+
     }
 }

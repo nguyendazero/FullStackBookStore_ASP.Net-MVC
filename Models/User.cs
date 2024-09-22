@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DotNet.LaptopStore.Models
 {
@@ -39,6 +40,7 @@ namespace DotNet.LaptopStore.Models
         [Required(ErrorMessage = "Role is required")]
         public int Role { get; set; }
 
+        [JsonIgnore]
         public virtual Cart? Cart { get; set; }
 
         public virtual ICollection<LikeRating> LikeRatings { get; set; } = new List<LikeRating>();

@@ -38,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession(); // Sử dụng session
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -16,11 +16,14 @@ namespace DotNet.LaptopStore.Controllers
         private readonly IRatingService _ratingService;
         private readonly ILaptopService _laptopService;
 
-        public UserController(IUserService userService, IRatingService ratingService, ILaptopService laptopService)
+        private readonly ICartService _cartService;
+
+        public UserController(IUserService userService, IRatingService ratingService, ILaptopService laptopService, ICartService cartService)
         {
             _userService = userService;
             _ratingService = ratingService;
             _laptopService = laptopService;
+            _cartService = cartService;
         }
         public IActionResult Index()
         {
@@ -42,11 +45,16 @@ namespace DotNet.LaptopStore.Controllers
             var user = _userService.GetUserByUsername(userName.Trim());
             if (user != null && BCrypt.Net.BCrypt.Verify(password.Trim(), user.Password))
             {
-                // Chuyển đổi toàn bộ đối tượng người dùng thành chuỗi JSON
+                // Nạp cart của người dùng từ database
+                user.Cart = _cartService.GetCartByIdUser(user.Id);
+
                 var userJson = JsonSerializer.Serialize(user);
-                // Lưu chuỗi JSON vào session
                 HttpContext.Session.SetString("User", userJson);
-                return RedirectToAction("Index", "Home"); // Chuyển hướng sau khi đăng nhập
+
+                // In ra thông tin session
+                Console.WriteLine($"User session: {HttpContext.Session.GetString("User")}");
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -54,6 +62,8 @@ namespace DotNet.LaptopStore.Controllers
                 return View("Login_Page");
             }
         }
+
+
 
 
         // Đăng xuất
@@ -198,8 +208,17 @@ namespace DotNet.LaptopStore.Controllers
             newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password.Trim());
 
             _userService.CreateUser(newUser);
+
+            // Khởi tạo Cart cho người dùng mới
+            var cart = new Cart { UserId = newUser.Id };
+            _cartService.CreateCart(cart);
+
+            // Gán Cart vào User
+            newUser.Cart = cart;
+
             ViewBag.Success = "Đăng ký thành công, hãy đăng nhập!";
             return View("Login_Page");
         }
+
     }
 }

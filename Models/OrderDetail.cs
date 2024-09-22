@@ -11,6 +11,9 @@ namespace DotNet.LaptopStore.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero")]
         public decimal Price { get; set; }
 
+        [Required(ErrorMessage = "Quantity is required")]
+        public int Quantity { get; set; }  // Số lượng laptop còn trong kho
+
         [Required(ErrorMessage = "Book ID is required")]
         public int LaptopId { get; set; }
         public virtual Laptop? Laptop { get; set; }

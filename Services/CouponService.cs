@@ -13,6 +13,7 @@ namespace DotNet.LaptopStore.Services
         void CreateCoupon(Coupon coupon);
         void UpdateCoupon(Coupon coupon);
         void DeleteCoupon(int id);
+        Coupon? GetCouponByCode(string couponCode);
     }
 
     public class CouponService : ICouponService
@@ -24,6 +25,14 @@ namespace DotNet.LaptopStore.Services
             _dataContext = dataContext;
         }
 
+        public Coupon? GetCouponByCode(string couponCode)
+        {
+            // Lấy thông tin mã giảm giá từ bảng Coupons, có thể trả về null
+            var coupon = _dataContext.Coupons
+                .FirstOrDefault(c => c.Code == couponCode && c.Expiry >= DateOnly.FromDateTime(DateTime.Now));
+
+            return coupon;
+        }
         public List<Coupon> GetAllCoupons()
         {
             return _dataContext.Coupons.ToList();

@@ -67,9 +67,16 @@ namespace DotNet.LaptopStore.Services
 
         public void CreateUser(User user)
         {
+            // Thêm User vào CSDL
             _dataContext.Users.Add(user);
             _dataContext.SaveChanges();
+
+            // Khởi tạo và thêm Cart cho User
+            var cart = new Cart { UserId = user.Id };
+            _dataContext.Carts.Add(cart);
+            _dataContext.SaveChanges();
         }
+
 
         public void UpdateUser(User user)
         {
