@@ -24,10 +24,10 @@ public class HomeController : Controller
         if (!string.IsNullOrEmpty(userJson))
         {
             user = JsonSerializer.Deserialize<User>(userJson);
+            if (user != null)
+                HttpContext.Session.SetString("FullName", user.FullName);
+
         }
-
-        ViewBag.FullName = user?.FullName ?? "";
-
         return View();
     }
 

@@ -76,23 +76,17 @@ namespace DotNet.LaptopStore.Controllers
         public IActionResult AddToCart(int id)
         {
             var userJson = HttpContext.Session.GetString("User");
-
             if (string.IsNullOrEmpty(userJson))
-            {
-                Console.WriteLine("User session is null or empty.");
-                return RedirectToAction("Login", "User");
-            }
-
+                return RedirectToAction("Login_Page", "User");
             var user = JsonSerializer.Deserialize<User>(userJson);
-
             if (user == null)
-            {
                 return RedirectToAction("Login", "User");
-            }
 
             _cartService.AddToCart(id, user);
 
-            return RedirectToAction("Index", "Cart", new { id = user.Id });
+            TempData["SuccessMessage"] = "Sản phẩm đã được thêm vào giỏ hàng!";
+
+            return RedirectToAction("Details", "Laptop", new { id = id });
         }
 
 

@@ -5,6 +5,7 @@
 @{
     var userJson = HttpContextAccessor?.HttpContext?.Session.GetString("User");
     var user = userJson != null ? JsonSerializer.Deserialize<User>(userJson) : null;
+    var fullName = user?.FullName ?? ""; // Hoặc một giá trị mặc định khác
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +97,7 @@
                     {
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle">
-                                <span class="padding_left_15">@ViewBag.FullName</span>
+                                <span class="padding_left_15">@fullName</span>
                             </a>
                             <div class="dropdown-menu">
                                 <a href="/User/ChangePassword_Page">Change Password</a>

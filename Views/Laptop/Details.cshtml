@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
-
 <body>
     <div class="breadcrumb-container">
         <ul class="breadcrumb">
@@ -329,7 +328,17 @@
         <div class="circle-2"></div>
     </section>
 
-
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            setTimeout(function () {
+                var message = '@Html.Raw(TempData["SuccessMessage"]?.ToString() ?? string.Empty)';
+                if (message) {
+                    alert(message);
+                }
+            }, 100); 
+        </script>
+    }
 
     <script>
         const tabbtn = document.querySelectorAll(".tablink");
