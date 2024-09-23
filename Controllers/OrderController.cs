@@ -56,18 +56,12 @@ namespace DotNet.LaptopStore.Controllers
         public IActionResult ProceedtoCheckout()
         {
             var userJson = HttpContext.Session.GetString("User");
-
             if (string.IsNullOrEmpty(userJson))
-            {
                 return RedirectToAction("Login", "User");
-            }
-
             var user = JsonSerializer.Deserialize<User>(userJson);
-
             if (user == null)
-            {
                 return RedirectToAction("Login", "User");
-            }
+
 
             Cart cart = _cartService.GetCartByIdUser(user.Id);
 
@@ -82,7 +76,19 @@ namespace DotNet.LaptopStore.Controllers
 
             HttpContext.Session.Remove("couponId");
 
-            return View("ThankYou");
+            // Chuyển hướng đến trang "Thank You" để ko bị reload đơn hàng
+            return RedirectToAction("ThankYou");
+        }
+
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
+
+        public IActionResult ListOrder(int id)
+        {
+            List<Order> orders = _orderService.GetAllOrdersByUserId(id);
+            return View(orders);
         }
     }
 }

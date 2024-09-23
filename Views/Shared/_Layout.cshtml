@@ -102,7 +102,7 @@
                             <div class="dropdown-menu">
                                 <a href="/User/ChangePassword_Page">Change Password</a>
                                 <a href="@Url.Action("ChangeUserInfo", "User", new { id = user?.Id })">Update Profile</a>
-                                <a href="/User/UpdateProfile">Orders History</a>
+                                <a href="@Url.Action("ListOrder","Order", new {id = user?.Id})">Orders History</a>
                                 <a href="/User/UpdateProfile">Settings</a>
                                 <li>
                                     <hr>

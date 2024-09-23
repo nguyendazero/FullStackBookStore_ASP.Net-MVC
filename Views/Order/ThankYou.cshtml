@@ -2,14 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/tiny-slider.css">
+    <link rel="stylesheet" type="text/css" href="~/css/cart-index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Thank you</title>
 </head>
 
 <body>
-    <h1>Thank you đã mua hàng</h1>
-    <div href="@Url.Action("Index", "Home")">quay lại trang chủ</div>
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
+        <h1 style="text-align: center; color: rgb(42, 215, 140);">Thank you đã mua hàng</h1>
+        <img class="text-center" src="~/images/completed-order.png" style="height: 80px;">
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="window.location.href='@Url.Action("Index", "Home")'">Quay lại trang
+                chủ</button>
+        </div>
+    </div>
+
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LVjoEJ7G2DM3LtiGPjG49J7PqPPwCcSl/0x+ShBZIh8=",
+  "Hash": "/Yixj9vbE1poOyCnChi/YlvcRM3GjYiMzwOm7CPF724=",
   "Source": "LaptopStore",
   "BasePath": "_content/LaptopStore",
   "Mode": "Default",
@@ -530,6 +530,25 @@
       "OriginalItemSpec": "wwwroot\\css\\normalize.css"
     },
     {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\order-index.css",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "css/order-index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\order-index.css"
+    },
+    {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\owl.carousel.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
@@ -682,6 +701,25 @@
       "OriginalItemSpec": "wwwroot\\images\\banner-bg.png"
     },
     {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\cart-empty.png",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "images/cart-empty.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cart-empty.png"
+    },
+    {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\Cart.png",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
@@ -718,6 +756,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\comment.png"
+    },
+    {
+      "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\completed-order.png",
+      "SourceId": "LaptopStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\LaptopStore\\wwwroot\\",
+      "BasePath": "_content/LaptopStore",
+      "RelativePath": "images/completed-order.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\completed-order.png"
     },
     {
       "Identity": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\couch.png",

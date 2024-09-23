@@ -105,6 +105,10 @@
       "PackagePath": "staticwebassets\\css\\normalize.css"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\order-index.css",
+      "PackagePath": "staticwebassets\\css\\order-index.css"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\owl.carousel.min.css",
       "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
     },
@@ -145,8 +149,16 @@
       "PackagePath": "staticwebassets\\images\\banner-bg.png"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\cart-empty.png",
+      "PackagePath": "staticwebassets\\images\\cart-empty.png"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\comment.png",
       "PackagePath": "staticwebassets\\images\\comment.png"
+    },
+    {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\completed-order.png",
+      "PackagePath": "staticwebassets\\images\\completed-order.png"
     },
     {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\images\\couch.png",
