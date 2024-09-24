@@ -18,8 +18,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\DotNet\LaptopStore
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/DotNet/LaptopStore/Views/Admin/Color.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29sb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Admin/Coupon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ291cG9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/DotNet/LaptopStore/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Admin/Laptop.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGFwdG9wLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Admin/Manuniture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFudW5pdHVyZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Admin/Order.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Admin/User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DotNet/LaptopStore/Views/Cart/Checkout.cshtml]
@@ -32,6 +56,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/DotNet/LaptopStore/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DotNet/LaptopStore/Views/Laptop/AddLaptopPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGFwdG9wXEFkZExhcHRvcFBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DotNet/LaptopStore/Views/Laptop/Details.cshtml]

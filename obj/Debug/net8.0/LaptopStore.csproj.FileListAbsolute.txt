@@ -137,3 +137,5 @@ D:\DotNet\LaptopStore\obj\Debug\net8.0\LaptopStore.pdb
 D:\DotNet\LaptopStore\obj\Debug\net8.0\LaptopStore.genruntimeconfig.cache
 D:\DotNet\LaptopStore\obj\Debug\net8.0\ref\LaptopStore.dll
 D:\DotNet\LaptopStore\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\DotNet\LaptopStore\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\DotNet\LaptopStore\bin\Debug\net8.0\Newtonsoft.Json.dll

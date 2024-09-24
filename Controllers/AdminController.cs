@@ -4,6 +4,7 @@ using System.Text.Json;
 using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 
+
 namespace DotNet.LaptopStore.Controllers
 {
     public class AdminController : Controller
@@ -11,12 +12,14 @@ namespace DotNet.LaptopStore.Controllers
         private readonly ILogger<AdminController> _logger;
         private readonly IOrderService _orderService;
         private readonly IUserService _userService;
+        private readonly ILaptopService _laptopService;
 
-        public AdminController(ILogger<AdminController> logger, IOrderService orderService, IUserService userService)
+        public AdminController(ILogger<AdminController> logger, IOrderService orderService, IUserService userService, ILaptopService laptopService)
         {
             _logger = logger;
             _orderService = orderService;
             _userService = userService;
+            _laptopService = laptopService;
         }
 
         public IActionResult Index()
@@ -30,6 +33,11 @@ namespace DotNet.LaptopStore.Controllers
             return View(orders);
         }
 
-
+        public IActionResult Laptop()
+        {
+            var laptops = _laptopService.GetAllLaptops();
+            laptops.Reverse();
+            return View(laptops);
+        }
     }
 }

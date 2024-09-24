@@ -6,6 +6,7 @@ using DotNet.LaptopStore.Models;
 using DotNet.LaptopStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace DotNet.LaptopStore.Controllers
 {
     public class LaptopController : Controller
@@ -13,12 +14,15 @@ namespace DotNet.LaptopStore.Controllers
         private readonly ILaptopService _laptopService;
         private readonly ICategoryService _categoryService;
         private readonly IColorService _colorService;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public LaptopController(ILaptopService laptopService, ICategoryService categoryService, IColorService colorService)
+
+        public LaptopController(ILaptopService laptopService, ICategoryService categoryService, IColorService colorService, ICloudinaryService cloudinaryService)
         {
             _laptopService = laptopService;
             _categoryService = categoryService;
             _colorService = colorService;
+            _cloudinaryService = cloudinaryService;
         }
         public IActionResult Index(string? status, int? categoryId)
         {
@@ -59,7 +63,8 @@ namespace DotNet.LaptopStore.Controllers
 
         public IActionResult Delete(int id)
         {
-            return View();
+            _laptopService.DeleteLaptop(id);
+            return RedirectToAction("Laptop", "Admin");
         }
 
         public IActionResult Save(Laptop Laptop)
@@ -72,5 +77,38 @@ namespace DotNet.LaptopStore.Controllers
             var laptop = _laptopService.GetLaptopById(id);
             return View(laptop);
         }
+
+        //-----------------ADMIN--------------
+        public IActionResult AddLaptopPage()
+        {
+            List<string> status = new List<string>() { "onsale", "discount", "runout" };
+            ViewBag.Category = _categoryService.GetAllCategories();
+            ViewBag.Color = _colorService.GetAllColors();
+            ViewBag.Status = status;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Laptop laptop, IFormFile image)
+        {
+            if (image != null && image.Length > 0)
+            {
+                var imageUrl = _cloudinaryService.UploadImage(image);
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    laptop.Image = imageUrl;
+                }
+            }
+            // Kiểm tra trạng thái của Model
+            if (ModelState.IsValid)
+            {
+                _laptopService.CreateLaptop(laptop);
+                return RedirectToAction("Laptop", "Admin");
+            }
+            return View("AddLaptopPage");
+        }
+
+
+
     }
 }

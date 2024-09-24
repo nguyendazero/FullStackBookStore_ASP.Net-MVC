@@ -23,6 +23,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddSession(); // Đăng ký dịch vụ Session
 builder.Services.AddHttpContextAccessor(); // Đăng ký IHttpContextAccessor
+builder.Services.AddScoped<ICloudinaryService, CloudinaryService>(); //cloudinary
 
 var app = builder.Build();
 

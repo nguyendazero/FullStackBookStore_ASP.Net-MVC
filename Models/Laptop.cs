@@ -21,8 +21,7 @@ namespace DotNet.LaptopStore.Models
         [StringLength(50, ErrorMessage = "Status cannot exceed 50 characters")]
         public string Status { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Image URL is required")]
-        public string Image { get; set; } = string.Empty; // Đường dẫn hình ảnh laptop
+        public string Image { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Quantity is required")]
         [Range(1, 10000, ErrorMessage = "Quantity must be at least 1 and at most 10000")]
