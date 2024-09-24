@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\LaptopStore.bundle.scp.css"
     },
     {
+      "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\admin-style.css",
+      "PackagePath": "staticwebassets\\css\\admin-style.css"
+    },
+    {
       "Id": "D:\\DotNet\\LaptopStore\\wwwroot\\css\\animate.min.css",
       "PackagePath": "staticwebassets\\css\\animate.min.css"
     },

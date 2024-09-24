@@ -48,13 +48,19 @@ namespace DotNet.LaptopStore.Controllers
                 // Nạp cart của người dùng từ database
                 user.Cart = _cartService.GetCartByIdUser(user.Id);
 
+                // Lưu thông tin user vào session
                 var userJson = JsonSerializer.Serialize(user);
                 HttpContext.Session.SetString("User", userJson);
 
-                // In ra thông tin session
-                Console.WriteLine($"User session: {HttpContext.Session.GetString("User")}");
-
-                return RedirectToAction("Index", "Home");
+                // Kiểm tra role của user
+                if (user.Role == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             }
             else
             {
@@ -62,10 +68,6 @@ namespace DotNet.LaptopStore.Controllers
                 return View("Login_Page");
             }
         }
-
-
-
-
         // Đăng xuất
         public IActionResult Logout()
         {

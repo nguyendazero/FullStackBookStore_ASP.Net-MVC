@@ -47,6 +47,7 @@ namespace DotNet.LaptopStore.Services
         public List<Order> GetAllOrders()
         {
             return _dataContext.Orders
+                .Include(o => o.User)
                 .Include(o => o.OrderDetails)
                 .ThenInclude(od => od.Laptop)
                 .ToList();
